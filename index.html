@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to CSS file -->
+</head>
+<body>
+  <div class="container">
+    <h1>Weather App</h1>
+    
+    <div class="dropdowns">
+      <!-- Country Dropdown -->
+      <label for="country">Select a Country:</label>
+      <select id="country" required>
+        <option value="">--Select a Country--</option>
+        <option value="PH">Philippines</option>
+        <option value="US">United States</option>
+        <option value="IN">India</option>
+        <option value="BR">Brazil</option>
+        <option value="GB">England</option>
+        <!-- Add more countries as needed -->
+      </select>
+
+      <!-- City Dropdown (Populated after country selection) -->
+      <label for="city">Select a City:</label>
+      <select id="city" required>
+        <option value="">--Select a City--</option>
+      </select>
+    </div>
+
+    <button id="getWeather" disabled>Get Weather</button>
+    <div id="weatherResult"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
