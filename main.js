@@ -1,3 +1,4 @@
+
 const countryDropdown = document.getElementById('country');
 const cityDropdown = document.getElementById('city');
 const getWeatherButton = document.getElementById('getWeather');
@@ -5,19 +6,20 @@ const weatherResult = document.getElementById('weatherResult');
 
 // Enable the weather button only when a city is selected
 cityDropdown.addEventListener('change', () => {
-  if (cityDropdown.value) {
-    getWeatherButton.disabled = false;
-  } else {
-    getWeatherButton.disabled = true;
-  }
+  getWeatherButton.disabled = !cityDropdown.value;
 });
+
+// Function to show a loading message
+function showLoading() {
+  weatherResult.innerHTML = '<p>Loading...</p>';
+}
 
 // Function to populate the city dropdown based on selected country
 async function populateCityDropdown(countryCode) {
   try {
     const response = await axios.get(`http://dataservice.accuweather.com/locations/v1/adminareas/${countryCode}`, {
       params: {
-        apikey: 'YvV98odF9Gx6E0GaRZTPzt4w1upS8dP8' // Replace with your AccuWeather API key
+        apikey: "YvV98odF9Gx6E0GaRZTPzt4w1upS8dP8" // Use environment variable
       }
     });
 
@@ -33,6 +35,7 @@ async function populateCityDropdown(countryCode) {
     });
   } catch (error) {
     console.error('Error fetching city data:', error);
+    weatherResult.innerHTML = `<p>Error fetching cities: ${error.message}</p>`;
   }
 }
 
@@ -67,6 +70,7 @@ function displayWeather(weatherData) {
 // Handle "Get Weather" button click
 getWeatherButton.addEventListener('click', async () => {
   const selectedCity = cityDropdown.value;
+  showLoading(); // Show loading message
 
   try {
     // Get Location Key from your backend (Express server)
@@ -80,6 +84,6 @@ getWeatherButton.addEventListener('click', async () => {
     // Display the weather data on the frontend
     displayWeather(weatherData);
   } catch (error) {
-    weatherResult.innerHTML = `<p>Error: ${error.message}</p>`;
+    weatherResult.innerHTML = `<p>Error fetching weather data: ${error.message}</p>`;
   }
 });

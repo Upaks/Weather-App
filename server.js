@@ -1,9 +1,12 @@
-const express = require('express');
-const axios = require('axios');
-const cors = require('cors');
+import express from "express";
+import axios from "axios";
+import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
-const API_KEY = 'YvV98odF9Gx6E0GaRZTPzt4w1upS8dP8'; // Replace with your AccuWeather API key
+const API_KEY = process.env.ACCUWEATHER_API_KEY; // Replace with your AccuWeather API key
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
