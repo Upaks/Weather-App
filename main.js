@@ -19,7 +19,7 @@ async function populateCityDropdown(countryCode) {
   try {
     const response = await axios.get(`http://dataservice.accuweather.com/locations/v1/adminareas/${countryCode}`, {
       params: {
-        apikey: "YvV98odF9Gx6E0GaRZTPzt4w1upS8dP8" // Use environment variable
+        apikey: "" // Use environment variable
       }
     });
 
